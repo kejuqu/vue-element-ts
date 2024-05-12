@@ -1,4 +1,4 @@
-# vue3-antd-ts
+# vue3-element-ts
 
 This template should help get you started developing with Vue 3 in Vite.
 
@@ -62,3 +62,25 @@ pnpm test:e2e --debug
 ```sh
 pnpm lint
 ```
+
+### Feature
+
+- login/sign, login will redirect to previous route [mock done]
+
+#### TODO:
+
+- layout
+  - sidebar (Avatar, Menu)
+    - menu - read area & Expenses record
+
+Header
+Dropdown + PageHeader + Search/AutoComplete
+Badge - 通知
+
+Index：- Calendar 展示当前的日期 - Card 展示个人信息，当前任务 - Carouse 跑马灯
+
+Content: - 新增个人信息 Form + Drawer - Cascader （地址）- Checkbox 选中爱好 - DatePicker 选择日期 - InputNumber 输入幸运数字 - Radio 性别 - Select 学历 - Switch 是否信息可见 - Upload 上传头像
+message 展示成果 or 失败
+
+    - 个人信息展示栏
+    	Card + Skeleton

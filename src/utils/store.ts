@@ -29,6 +29,14 @@ class LocalStorageManager<T> {
 
     this.setItem(this.uniqueKey, value)
   }
+
+  get<T>() {
+    if (!this.uniqueKey) {
+      throw new TypeError('use set function must pass uniqueKey to constructor.')
+    }
+
+    return this.getItem<T>(this.uniqueKey)
+  }
 }
 
 export const userStoreManager = new LocalStorageManager<User>(UserKey)

@@ -1,68 +1,97 @@
 <template>
-  <a-form :model="formState" name="basic" layout="vertical" autocomplete="off" @finish="onFinish">
-    <a-typography-title :level="2" class="flex justify-center w-full text-center mb-12">{{
-      signInfo.title
-    }}</a-typography-title>
-    <a-form-item
+  <el-form
+    ref="formRef"
+    :model="dynamicValidateForm"
+    label-width="auto"
+    label-position="top"
+    class="demo-dynamic"
+  >
+    <h2 class="flex justify-center font-bold text-2xl w-full text-center mb-8">
+      {{ signInfo.title }}
+    </h2>
+    <el-form-item
       label="E-mail"
-      name="email"
-      :rules="[{ required: true, message: 'Please input your email!', type: 'email' }]"
+      prop="email"
+      :rules="[
+        {
+          required: true,
+          message: 'Please input email address',
+          trigger: 'blur'
+        },
+        {
+          type: 'email',
+          message: 'Please input correct email address',
+          trigger: 'blur'
+        }
+      ]"
     >
-      <a-input v-model:value="formState.email" />
-    </a-form-item>
+      <el-input v-model="dynamicValidateForm.email" />
+    </el-form-item>
 
-    <a-form-item
+    <el-form-item
       label="Password"
-      name="password"
-      :rules="[{ required: true, message: 'Please input your password!' }]"
+      prop="password"
+      :rules="[{ required: true, message: 'Please input your password!', trigger: 'blur' }]"
     >
-      <a-input-password v-model:value="formState.password" />
-    </a-form-item>
+      <el-input show-password type="password" v-model="dynamicValidateForm.password" />
+    </el-form-item>
 
-    <a-form-item :wrapper-col="{ span: 24 }">
-      <a-button type="primary" html-type="submit" class="w-full">{{
-        signInfo.submitText
-      }}</a-button>
-    </a-form-item>
-    <a-form-item>
-      <div class="flex-center">
+    <el-form-item>
+      <el-button
+        :loading="loading"
+        type="primary"
+        html-type="submit"
+        @click="submitForm(formRef)"
+        class="w-full"
+        :loading-icon="LoadingOutlined"
+        >{{ signInfo.submitText }}</el-button
+      >
+    </el-form-item>
+    <el-form-item>
+      <div class="flex-center w-full">
         {{ signInfo.link.description }}
         <RouterLink class="ml-2 text-blue-600" :to="signInfo.link.href">
           {{ signInfo.link.text }}</RouterLink
         >
       </div>
-    </a-form-item>
+    </el-form-item>
 
-    <div class="mt-6">
-      <a-divider> Or </a-divider>
-      <a-flex wrap="wrap" vertical gap="large">
-        <a-button
-          v-for="item in thirdLogins"
-          :icon="h(item.icon)"
-          :key="item.name"
-          type="primary"
-          ghost
-          @click="item.onClick"
-          class="w-full flex items-center gap-2"
-        >
-          <div class="flex gap-4">{{ signType }} with {{ item.name }}</div></a-button
-        >
-      </a-flex>
-    </div>
-  </a-form>
+    <el-divider> Or </el-divider>
+    <el-space>
+      <el-button
+        ghost
+        v-for="item in thirdLogins"
+        :icon="h(item.icon)"
+        :key="item.name"
+        @click="item.onClick"
+      >
+        <div class="">{{ signType }} with {{ item.name }}</div></el-button
+      >
+    </el-space>
+  </el-form>
 </template>
 <script setup lang="ts">
-import { reactive, h } from 'vue'
+import { reactive, h, ref } from 'vue'
+import { ElMessage, type FormInstance } from 'element-plus'
+import {
+  AlipayCircleOutlined,
+  WechatOutlined,
+  LoadingOutlined,
+  GithubOutlined
+} from '@ant-design/icons-vue'
+
 import { SignType } from '@/typings'
 import type { SignUser } from '@/typings/user'
-import { AlipayCircleOutlined, WechatOutlined, GithubOutlined } from '@ant-design/icons-vue'
 
-const { signType } = defineProps<{
+const formRef = ref<FormInstance>()
+
+const { signType, loading, onFinish } = defineProps<{
+  loading: boolean
   signType: SignType
   onFinish: (values: SignUser) => Promise<void>
 }>()
 
-const formState = reactive<SignUser>({
+const dynamicValidateForm = reactive<SignUser>({
   email: '',
   password: ''
 })
@@ -113,5 +142,15 @@ const thirdLogins = [
     }
   }
 ]
+
+const submitForm = (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  formEl.validate((valid: any) => {
+    if (valid) {
+      onFinish(dynamicValidateForm)
+    } else {
+      ElMessage.error('Oops, validation failed.')
+    }
+  })
+}
 </script>
-<style></style>

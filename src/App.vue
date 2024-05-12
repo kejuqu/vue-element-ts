@@ -1,17 +1,10 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import { useAuth } from './hooks'
+
+// useAuth()
 </script>
 
 <template>
-  <a-config-provider
-    :theme="{
-      token: {
-        colorPrimary: '#000'
-      }
-    }"
-  >
-    <RouterView />
-  </a-config-provider>
+  <RouterView />
 </template>
-
-<style scoped></style>
