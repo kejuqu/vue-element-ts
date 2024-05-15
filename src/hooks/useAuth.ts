@@ -1,22 +1,29 @@
-import { onBeforeMount, onMounted, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import { authService } from '@/services/authService'
 import type { User } from '@/typings/user'
 import { withoutLoginRoutes } from '@/constants/global'
+import { userStoreManager } from '@/utils/store'
+
+const getUsernameByEmail = (email?: string) => {
+  if (!email) return ''
+  return email.split('@')[0]
+}
 
 export const useAuth = () => {
   const router = useRouter()
   const route = useRoute()
 
-  const userInfo = ref<User>()
+  let userInfo = reactive<User>(userStoreManager.get() as User)
 
-  onBeforeMount(async () => {
-    const user = await authService.getUserInfo()
+  authService.getUserInfo().then((user) => {
     const isLocationInWithoutLoginRoutes = withoutLoginRoutes.includes(route.path)
 
     if (user) {
-      userInfo.value = user
+      Object.assign(userInfo, user)
+
+      console.log('userInfoLLLL', userInfo)
       if (isLocationInWithoutLoginRoutes) {
         router.push('/')
       }
@@ -27,9 +34,11 @@ export const useAuth = () => {
       router.push(`/login?redirect=${route.path}`)
     }
   })
-
   return {
-    userInfo,
-    isLogin: !!userInfo.value
+    userInfo: {
+      ...userInfo,
+      username: getUsernameByEmail(userInfo?.email)
+    },
+    isLogin: !!userInfo?.email
   }
 }

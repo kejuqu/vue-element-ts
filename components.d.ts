@@ -7,18 +7,28 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ElAvatar: typeof import('element-plus/es')['ElAvatar']
+    ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
+    ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
     ElDivider: typeof import('element-plus/es')['ElDivider']
     ElFlex: typeof import('element-plus/es')['ElFlex']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
+    ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElInputPassword: typeof import('element-plus/es')['ElInputPassword']
+    ElMenu: typeof import('element-plus/es')['ElMenu']
+    ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElMenuItemGroup: typeof import('element-plus/es')['ElMenuItemGroup']
     ElSpace: typeof import('element-plus/es')['ElSpace']
+    ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElText: typeof import('element-plus/es')['ElText']
+    Header: typeof import('./src/components/frame/Header.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Sidebar: typeof import('./src/components/frame/Sidebar.vue')['default']
     SignForm: typeof import('./src/components/SignForm.vue')['default']
   }
 }

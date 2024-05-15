@@ -1,5 +1,4 @@
 import { onMounted, onUnmounted, ref } from 'vue'
-import { useWindowSize } from '@vueuse/core'
 
 export function useWindowResize() {
   const width = ref(window.innerWidth)
