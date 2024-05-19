@@ -19,6 +19,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'Home',
+      redirect: '/reading',
       component: Layout,
       children: [...menus]
     }

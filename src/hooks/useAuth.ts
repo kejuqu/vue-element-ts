@@ -23,7 +23,6 @@ export const useAuth = () => {
     if (user) {
       Object.assign(userInfo, user)
 
-      console.log('userInfoLLLL', userInfo)
       if (isLocationInWithoutLoginRoutes) {
         router.push('/')
       }

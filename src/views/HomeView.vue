@@ -1,5 +1,8 @@
-<script setup lang="ts"></script>
-
 <template>
-  <main>xxxxxxxx</main>
+  <main>
+    there there
+    <div id="container"></div>
+  </main>
 </template>
+
+<script setup lang="ts"></script>
