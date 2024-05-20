@@ -3,9 +3,8 @@
     <Sidebar />
     <section class="w-full flex flex-col px-8 py-4">
       <Header />
-      <main class="">
-        layouts
-        <!-- <RouterView /> -->
+      <main class="my-[1vw] mx-[1vw]">
+        <RouterView />
         <!-- <div id="container" v-show="window?.location?.pathname === '/'">xxxx</div> -->
       </main>
     </section>

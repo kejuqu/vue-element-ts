@@ -1,5 +1,4 @@
 import { Reading, Document, Setting } from '@element-plus/icons-vue'
-import HomeView from '../views/HomeView.vue'
 
 export const menus = [
   {
@@ -7,20 +6,20 @@ export const menus = [
     path: '/reading',
     name: 'reading',
     title: 'Read Area',
-    component: HomeView
+    component: () => import('../views/reading.vue')
   },
   {
     icon: Document,
     path: '/expenses',
     name: 'expenses',
     title: 'Expenses Record',
-    component: HomeView
+    component: () => import('../views/expenses.vue')
   },
   {
     icon: Setting,
     path: '/settings',
     name: 'settings',
     title: 'Profile Settings',
-    component: HomeView
+    component: () => import('../views/settings.vue')
   }
 ]

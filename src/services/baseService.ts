@@ -10,7 +10,7 @@ export class BaseService {
     return data
   }
 
-  get(url: string, config: AxiosRequestConfig<any> & CustomOption) {
+  get(url: string, config?: AxiosRequestConfig<any> & CustomOption) {
     const { formatResponse, ...restConfig } = config || {}
     const format = formatResponse || this.defaultFormatResponse
 
