@@ -1,7 +1,7 @@
 <template lang="">
   <section class="w-full h-screen flex">
     <Sidebar />
-    <section class="w-full flex flex-col px-8 py-4">
+    <section class="w-full flex flex-col px-8 py-4 overflow-y-scroll">
       <Header />
       <main class="my-[1vw] mx-[1vw]">
         <RouterView />

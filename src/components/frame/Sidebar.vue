@@ -1,5 +1,5 @@
 <template lang="">
-  <aside>
+  <aside class="hidden sm:block">
     <el-menu
       default-active="2"
       class="el-menu-vertical-demo h-screen"
