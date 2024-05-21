@@ -23,15 +23,15 @@ console.log('categoryBookList: ', categoryBookList)
       v-for="(item, index) in books"
       :key="item.searchIdx"
       shadow="always"
-      class="flex lg:flex-[1_0_26%] xl:flex-[1_0_23%]"
+      class="flex lg:flex-[1_0_26%] xl:flex-[1_0_23%] hover:bg-blue-200 transition-colors"
     >
       <div class="flex gap-2 mb-2">
         <img :src="item.bookInfo.cover" :alt="item.bookInfo.title" />
         <div class="flex flex-col">
           <div>{{ item.bookInfo.title }}</div>
-          <div>{{ item.bookInfo.author }}</div>
-          <div>阅读量: {{ item.readingCount }}</div>
-          <div>类别: {{ item.bookInfo.category }}</div>
+          <div class="text-gray-500">{{ item.bookInfo.author }}</div>
+          <div class="text-gray-500">阅读量: {{ item.readingCount }}</div>
+          <div class="text-gray-500">类别: {{ item.bookInfo.category }}</div>
         </div>
       </div>
       <div class="w-full">{{ item.bookInfo.intro }}</div>
